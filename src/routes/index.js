@@ -1,5 +1,11 @@
 const express = require('express');
-const middlewares = require('./../middlewares');
+
+// Middlewares
+const checkUserToken = require('./../middlewares/checkUserToken');
+const checkStreamIdentifier = require('../middlewares/checkStreamIdentifier');
+const checkUserCanStream = require('./../middlewares/checkUserCanStream');
+
+// Controllers
 const userController = require('./../controllers/userController');
 const streamController = require('./../controllers/streamController');
 
@@ -12,9 +18,25 @@ router.get('/', function(req, res) {
 
 // API Routes
 router.get('/user', userController.create);
-router.get('/user/:token', userController.show);
-router.get('/stream/user/:token', streamController.create);
-router.patch('/stream/:stream/user/:token', streamController.persist);
-router.delete('/stream/:stream/user/:token', streamController.destroy);
+router.get('/user/:token', checkUserToken, userController.show);
+router.get(
+  '/stream/user/:token',
+  checkUserToken,
+  checkUserCanStream,
+  streamController.create,
+);
+router.patch(
+  '/stream/:stream/user/:token',
+  checkUserToken,
+  checkUserCanStream,
+  checkStreamIdentifier,
+  streamController.persist,
+);
+router.delete(
+  '/stream/:stream/user/:token',
+  checkUserToken,
+  checkStreamIdentifier,
+  streamController.destroy,
+);
 
 module.exports = router;
