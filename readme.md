@@ -5,7 +5,8 @@
 ## Roadmap 🗺
 
 #### General
-- [ ] Set up Jest for testing
+
+- [x] Set up Jest for testing
 - [x] Add dotEnv lib and create `.env.example` file
 - [ ] Add Api docs
 - [ ] Package into docker container for easy installation
@@ -25,12 +26,13 @@
 
 ### API Routes
 
-- [ ] Create [GET] - `/user/` route to return user token
-- [ ] Create [POST] - `/stream?token=USER_TOKEN` route to return stream identifier
-- [ ] Create [PATCH] - `/stream/{streamId}?token=USER_TOKEN` route to keep alive stream i.e. heartbeat
-- [ ] Create [DELETE] - `/stream/{streamId}?token=USER_TOKEN` route to invalidates streamId allowing new ones to be added.
+- [x] Create [GET] - `/user/` route to return user token
+- [x] Create [GET] - `/user/{token}` route to return all streams for user
+- [x] Create [GET] - `/stream/user/{token}` route to return new stream identifier if allowed
+- [x] Create [PATCH] - `/stream/{streamId}/user/{token}` route to keep alive stream i.e. heartbeat
+- [x] Create [DELETE] - `/stream/{streamId}/user/{token}` route to invalidates stream allowing new ones to be added.
 
-----
+---- 
 ## Purpose 🔎
 
 WIP

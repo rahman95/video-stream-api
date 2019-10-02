@@ -1,9 +1,11 @@
 const express = require('express');
 const routes = require('./src/routes');
+const config = require('./config.json');
 
 const app = express();
+const routerPrefix = config.router.prefix;
 
-app.use('/', routes);
+app.use(routerPrefix, routes);
 
 // TODO: Add env based error handling
 // if (app.get('env') === 'development') {
