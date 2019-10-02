@@ -1,5 +1,7 @@
 # Video Stream API
 
+[![Build Status](https://travis-ci.org/rahman95/video-stream-api.svg?branch=master)](https://travis-ci.org/rahman95/video-stream-api)
+
 ## Roadmap 🗺
 
 #### General
