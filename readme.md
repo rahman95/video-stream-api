@@ -1,6 +1,7 @@
 # Video Stream API
 
 [![Build Status](https://travis-ci.org/rahman95/video-stream-api.svg?branch=master)](https://travis-ci.org/rahman95/video-stream-api)
+[![Coverage Status](https://coveralls.io/repos/github/rahman95/video-stream-api/badge.svg?branch=master)](https://coveralls.io/github/rahman95/video-stream-api?branch=master)
 
 ## Roadmap 🗺
 
