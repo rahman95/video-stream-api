@@ -3,14 +3,15 @@ const mongoose = require('mongoose');
 const app = require('./app');
 
 // Connect to Mongo
-mongoose.connect(process.env.DB_CONNECTION_URI);
-mongoose.connection.on('error', err => {
+try {
+  mongoose.set('useCreateIndex', true);
+  await mongoose.connect(connectionString, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+} catch (err) {
   console.error(err.message);
-});
-
-// Init Models
-require('./src/models/stream');
-require('./src/models/user');
+}
 
 // Start up express server
 app.set('port', process.env.PORT || 7777);

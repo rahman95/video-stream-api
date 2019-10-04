@@ -7,6 +7,7 @@ const createServer = async () => {
   const connectionString = await server.getConnectionString();
 
   try {
+    mongoose.set('useCreateIndex', true);
     await mongoose.connect(connectionString, {
       useNewUrlParser: true,
       useUnifiedTopology: true,

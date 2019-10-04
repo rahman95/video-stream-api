@@ -17,9 +17,10 @@
 
 #### Persistance
 
-- [ ] Use mongo to store data
-- [ ] Create store for user tokens
-- [ ] Create store for stream identifier
+- [x] Use mongo to store data
+- [x] Set up mongodb-memory-server for in memory testing
+- [x] Create store for user tokens
+- [x] Create store for stream identifier
 - [ ] Create seeder file for dummy data
 - [ ] Create command to seed
 - [ ] Create command to clear db
@@ -36,9 +37,9 @@
 #### API Routes
 
 - [x] Create [GET] - `/user/` route
-  - [ ] add logic to return user token
+  - [x] add logic to return user token
 - [x] Create [GET] - `/user/{token}` route
-  - [ ] add logic to return all streams for user
+  - [x] add logic to return all streams for user
 - [x] Create [GET] - `/stream/user/{token}` route 
   - [ ] add logic to return new stream identifier if allowed
 - [x] Create [PATCH] - `/stream/{streamId}/user/{token}` route 
