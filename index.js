@@ -8,6 +8,7 @@ mongoose.connection.on('error', err => {
   console.error(err.message);
 });
 
+// Init Models
 require('./src/models/stream');
 require('./src/models/user');
 

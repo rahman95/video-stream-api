@@ -1,16 +1,8 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
+const { createToken } = require('./../utils/helpers');
 
 // Define Schema
 const userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    unique: true,
-    lowercase: true,
-    trim: true,
-    validate: [validator.isEmail, 'Invalid Email Address'],
-    required: true,
-  },
   token: {
     type: String,
     trim: true,
@@ -25,7 +17,6 @@ const userSchema = new mongoose.Schema({
 
 // Define Indexes
 userSchema.index({
-  email: 1,
   token: 1,
 });
 
