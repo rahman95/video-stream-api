@@ -7,6 +7,7 @@
     "keepAlive": {
       "requestInterval": 60,
       "maxInterval": 90
-    }
+    },
+    "maxConcurrent": 3
   }
 }

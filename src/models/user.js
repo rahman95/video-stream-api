@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { createToken } = require('./../utils/helpers');
+const config = require('./../../config.json');
 
 // Define Schema
 const userSchema = new mongoose.Schema({
@@ -24,5 +25,30 @@ userSchema.index({
 userSchema.virtual('streamCount').get(function() {
   return this.streams.length;
 });
+
+//Define methods on model
+userSchema.methods.removeExpiredStreams = async function() {
+  await this.populate('streams').execPopulate();
+  const { streams } = this;
+
+  //if empty return early
+  if (streams.length < 1) {
+    return this;
+  }
+
+  const validStreams = streams
+    .filter(stream => stream.isValid())
+    .map(stream => stream._id);
+
+  this.streams = validStreams;
+
+  return await this.save();
+};
+
+userSchema.methods.canStream = function() {
+  const maxConcurrentStreams = config.streams.maxConcurrent;
+
+  return this.streamCount < maxConcurrentStreams;
+};
 
 module.exports = mongoose.model('User', userSchema);

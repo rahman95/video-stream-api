@@ -9,7 +9,7 @@ module.exports = {
   coverageReporters: [
     'lcov',
     // "json",
-    // "text",
+    'text',
     // "clover"
   ],
   testEnvironment: 'node',

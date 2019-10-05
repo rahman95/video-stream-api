@@ -1,3 +1,4 @@
+const dayjs = require('dayjs');
 const userModel = require('./../../../src/models/user');
 const streamModel = require('./../../../src/models/stream');
 const { createServer, destroyServer } = require('./../../utils/mongoHelper');
@@ -80,5 +81,66 @@ describe('User Model', () => {
 
     expect(user1.streamCount).toEqual(2);
     expect(user2.streamCount).toEqual(1);
+  });
+
+  describe('removeExpiredStreams method', () => {
+    test('removes all expired streams', async () => {
+      const validDate = dayjs();
+      const invalidDate = dayjs().subtract(1, 'hour');
+
+      const stream1 = await streamModel.create({ updatedAt: validDate }); // Valid
+      const stream2 = await streamModel.create({ updatedAt: invalidDate }); // Invalid - to be removed
+      const stream3 = await streamModel.create({ updatedAt: validDate }); // Valid
+
+      const user = await userModel.create({
+        token: 'abc1233',
+        streams: [stream1._id, stream2._id, stream3._id],
+      });
+      expect(user.streams.length).toBe(3);
+
+      const updatedUser = await user.removeExpiredStreams();
+      expect(updatedUser.streams.length).toBe(2);
+    });
+    test('works if no streams', async () => {
+      const user = await userModel.create({ token: 'abc1233' });
+      const updatedUser = await user.removeExpiredStreams();
+
+      expect(user).toMatchObject(updatedUser);
+    });
+  });
+
+  describe('canStream method', () => {
+    test('returns true if below limit', async () => {
+      const date = dayjs();
+      const stream1 = await streamModel.create({ updatedAt: date });
+      const stream2 = await streamModel.create({ updatedAt: date });
+
+      const user = await userModel.create({
+        token: 'abc1233',
+        streams: [stream1._id, stream2._id],
+      });
+
+      expect(user.canStream()).toBeTruthy();
+    });
+    test('returns false if limit or above', async () => {
+      const date = dayjs();
+      const stream1 = await streamModel.create({ updatedAt: date });
+      const stream2 = await streamModel.create({ updatedAt: date });
+      const stream3 = await streamModel.create({ updatedAt: date });
+      const stream4 = await streamModel.create({ updatedAt: date });
+
+      const user1 = await userModel.create({
+        token: 'abc1233',
+        streams: [stream1._id, stream2._id, stream3._id],
+      });
+
+      const user2 = await userModel.create({
+        token: 'abc1233',
+        streams: [stream1._id, stream2._id, stream3._id, stream4._id],
+      });
+
+      expect(user1.canStream()).toBeFalsy();
+      expect(user2.canStream()).toBeFalsy();
+    });
   });
 });
