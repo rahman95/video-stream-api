@@ -29,8 +29,10 @@
 
 - [x] Create CheckUserTokenMiddleware
   - [ ] Check user token exists and is valid
+  
 - [x] Create CheckStreamIdentfierMiddleware 
   - [ ] Check stream identifer exists and is valid
+
 - [x] Create CheckUserCanStreamMiddleware
   - [ ] Check if user is not over alloted MAX_STREAM_COUNT
 
@@ -38,12 +40,16 @@
 
 - [x] Create [GET] - `/user/` route
   - [x] add logic to return user token
+
 - [x] Create [GET] - `/user/{token}` route
   - [x] add logic to return all streams for user
+
 - [x] Create [GET] - `/stream/user/{token}` route 
   - [ ] add logic to return new stream identifier if allowed
+
 - [x] Create [PATCH] - `/stream/{streamId}/user/{token}` route 
   - [ ] add logic to keep alive stream i.e. heartbeat
+
 - [x] Create [DELETE] - `/stream/{streamId}/user/{token}` route 
   - [ ] add logic to invalidate stream allowing new ones to be added
 

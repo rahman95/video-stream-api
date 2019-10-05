@@ -24,32 +24,15 @@ describe('User Controller', () => {
     expect(mockRes.json).toHaveBeenCalledWith({ token });
   });
 
-  test('show method throws error when no token passed', async () => {
-    const mockReq = mockRequest({});
-    const mockRes = mockResponse();
-
-    await userController.show(mockReq, mockRes);
-
-    expect(mockRes.status).toHaveBeenCalledWith(400);
-    expect(mockRes.send).toHaveBeenCalledWith('Error - No token passed');
-  });
-
-  test('show method throws error when token not found', async () => {
-    const mockReq = mockRequest({ token: 'abc123' });
-    const mockRes = mockResponse();
-
-    await userController.show(mockReq, mockRes);
-
-    expect(mockRes.status).toHaveBeenCalledWith(404);
-    expect(mockRes.send).toHaveBeenCalledWith('Error - Not Found');
-  });
-
   test('show method returns success with valid token', async () => {
     const userData = { token: createToken() };
     const user = await userModel.create(userData);
 
     const mockReq = mockRequest(userData);
     const mockRes = mockResponse();
+
+    // Attach user on to locals like the previous middleware would
+    mockRes.locals.user = user;
 
     await userController.show(mockReq, mockRes);
 

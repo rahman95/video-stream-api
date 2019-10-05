@@ -12,11 +12,15 @@ const mockResponse = () => {
   res.send = jest.fn().mockReturnValue(res);
   res.status = jest.fn().mockReturnValue(res);
   res.json = jest.fn().mockReturnValue(res);
+  res.locals = {};
 
   return res;
 };
 
+const mockNext = jest.fn();
+
 module.exports = {
   mockRequest,
   mockResponse,
+  mockNext,
 };
