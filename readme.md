@@ -14,6 +14,7 @@
 
 - [ ] Add Api docs
 - [ ] Package into docker container for easy installation
+- [ ] Add postman api endpoints export
 
 #### Persistance
 

@@ -1,7 +1,9 @@
-const isTodaysDate = date => {
-  const today = new Date();
+const dayjs = require('dayjs');
 
-  return today.toDateString() === date.toDateString();
+const isTodaysDate = date => {
+  const today = dayjs();
+
+  return today.diff(date, 'day') === 0;
 };
 
 module.exports = { isTodaysDate };

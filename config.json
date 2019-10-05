@@ -2,5 +2,11 @@
   "version": "v1",
   "router": {
     "prefix": "/api/v1"
+  },
+  "streams": {
+    "keepAlive": {
+      "requestInterval": 60,
+      "maxInterval": 90
+    }
   }
 }

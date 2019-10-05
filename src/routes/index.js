@@ -28,8 +28,8 @@ router.get(
 router.patch(
   '/stream/:stream/user/:token',
   checkUserToken,
-  checkUserCanStream,
   checkStreamIdentifier,
+  checkUserCanStream,
   streamController.persist,
 );
 router.delete(
