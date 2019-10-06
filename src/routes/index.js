@@ -12,9 +12,11 @@ const streamController = require('./../controllers/streamController');
 const router = express.Router();
 
 // Testing
-router.get('/', function(req, res) {
-  res.send('Hello World!');
-});
+if (process.env.NODE_ENV !== 'production') {
+  router.get('/', function(req, res) {
+    res.send('Hello World!');
+  });
+}
 
 // API Routes
 router.get('/user', userController.create);
@@ -38,5 +40,10 @@ router.delete(
   checkStreamIdentifier,
   streamController.destroy,
 );
+
+// Catch all route
+router.all('*', (req, res) => {
+  res.status(404).send('Error - Not Found');
+});
 
 module.exports = router;

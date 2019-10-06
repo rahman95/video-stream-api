@@ -1,7 +1,7 @@
 const streamModel = require('./../models/stream');
 
 const check = async (req, res, next) => {
-  const streamId = req.params.streamId;
+  const streamId = req.params.stream;
 
   // If not streamId, return early
   if (!streamId) {

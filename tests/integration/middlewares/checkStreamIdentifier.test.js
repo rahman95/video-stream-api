@@ -30,7 +30,7 @@ describe('checkUserToken Middleware', () => {
   });
 
   test('check method throws error when stream id not found', async () => {
-    const mockReq = mockRequest({ streamId: 'abc123' });
+    const mockReq = mockRequest({ stream: 'abc123' });
     const mockRes = mockResponse();
 
     await checkStreamIdentifier(mockReq, mockRes, mockNext);
@@ -42,7 +42,7 @@ describe('checkUserToken Middleware', () => {
   test('check method throws error when stream is no longer valid', async () => {
     const expiredUpdateAt = dayjs().subtract(1, 'hour');
     const stream = await streamModel.create({ updatedAt: expiredUpdateAt });
-    const mockReq = mockRequest({ streamId: stream._id });
+    const mockReq = mockRequest({ stream: stream._id });
     const mockRes = mockResponse();
 
     await checkStreamIdentifier(mockReq, mockRes, mockNext);
@@ -55,7 +55,7 @@ describe('checkUserToken Middleware', () => {
     const date = dayjs();
     const stream = await streamModel.create({ updatedAt: date });
 
-    const mockReq = mockRequest({ streamId: stream._id });
+    const mockReq = mockRequest({ stream: stream._id });
     const mockRes = mockResponse();
 
     await checkStreamIdentifier(mockReq, mockRes, mockNext);

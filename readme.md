@@ -9,6 +9,7 @@
 
 - [x] Set up Jest for testing
 - [x] Add dotEnv lib and create `.env.example` file
+- [ ] Update readme with instructions
 
 #### Future Considerations
 
@@ -29,13 +30,13 @@
 #### Middlewares
 
 - [x] Create CheckUserTokenMiddleware
-  - [ ] Check user token exists and is valid
+  - [x] Check user token exists and is valid
   
 - [x] Create CheckStreamIdentfierMiddleware 
-  - [ ] Check stream identifer exists and is valid
+  - [x] Check stream identifer exists and is valid
 
 - [x] Create CheckUserCanStreamMiddleware
-  - [ ] Check if user is not over alloted MAX_STREAM_COUNT
+  - [x] Check if user is not over alloted MAX_STREAM_COUNT
 
 #### API Routes
 
@@ -49,10 +50,10 @@
   - [ ] add logic to return new stream identifier if allowed
 
 - [x] Create [PATCH] - `/stream/{streamId}/user/{token}` route 
-  - [ ] add logic to keep alive stream i.e. heartbeat
+  - [x] add logic to keep alive stream i.e. heartbeat
 
 - [x] Create [DELETE] - `/stream/{streamId}/user/{token}` route 
-  - [ ] add logic to invalidate stream allowing new ones to be added
+  - [x] add logic to invalidate stream allowing new ones to be added
 
 ---- 
 ## Purpose 🔎

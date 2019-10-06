@@ -32,6 +32,7 @@ describe('Stream Controller', () => {
 
   test('persist method returns success with valid stream', async () => {
     const stream = await streamModel.create({});
+    const { updatedAt } = stream;
 
     const mockReq = mockRequest();
     const mockRes = mockResponse();
@@ -41,12 +42,11 @@ describe('Stream Controller', () => {
 
     // get fresh instance of document
     const newStream = await streamModel.findById(stream._id).exec();
+    const newUpdatedAt = newStream.updatedAt;
 
     expect(mockRes.status).toHaveBeenCalledWith(204);
-    expect(dayjs(stream.updatedAt)).not.toEqual(dayjs(newStream.updatedAt));
-    expect(
-      dayjs(newStream.updatedAt).isAfter(dayjs(stream.updatedAt)),
-    ).toBeTruthy();
+    expect(updatedAt).not.toEqual(newUpdatedAt);
+    expect(dayjs(newUpdatedAt).isAfter(dayjs(updatedAt))).toBeTruthy();
   });
 
   test('destroy method returns success and removes entry', async () => {

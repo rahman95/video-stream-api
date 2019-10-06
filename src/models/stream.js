@@ -40,8 +40,9 @@ streamSchema.methods.keepAlive = async function() {
   const keepAliveMaxInterval = config.streams.keepAlive.maxInterval;
   const maxValidDate = now.add(keepAliveMaxInterval, 'second');
 
-  // update model instance with new date instance
-  return await this.updateOne({ updatedAt: maxValidDate }).exec();
+  this.updatedAt = maxValidDate;
+
+  return await this.save();
 };
 
 module.exports = mongoose.model('Stream', streamSchema);
