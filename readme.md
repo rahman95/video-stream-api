@@ -9,13 +9,16 @@
 
 - [x] Set up Jest for testing
 - [x] Add dotEnv lib and create `.env.example` file
-- [ ] Update readme with instructions
 
 #### Future Considerations
 
-- [ ] Add Api docs
+- [x] Add Api docs
+- [x] Add postman api endpoints export
+- [ ] Update readme with instructions
 - [ ] Package into docker container for easy installation
-- [ ] Add postman api endpoints export
+- [ ] Create seeder file for dummy data
+- [ ] Create command to seed
+- [ ] Create command to clear db
 
 #### Persistance
 
@@ -23,9 +26,6 @@
 - [x] Set up mongodb-memory-server for in memory testing
 - [x] Create store for user tokens
 - [x] Create store for stream identifier
-- [ ] Create seeder file for dummy data
-- [ ] Create command to seed
-- [ ] Create command to clear db
 
 #### Middlewares
 

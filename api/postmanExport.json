@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "b9d55986-22c3-4dc4-932c-6ac1e2815431",
+		"name": "Video Stream API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User Routes",
+			"description": "",
+			"item": [
+				{
+					"name": "User Create",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:7777/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						},
+						"description": "Creates token for user to be used for consumption of stream endpoints"
+					},
+					"response": []
+				},
+				{
+					"name": "User Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:7777/api/v1/user/l5cw62cpvzhnuittq6hc1570377925272",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"l5cw62cpvzhnuittq6hc1570377925272"
+							]
+						},
+						"description": "Shows all streams for user"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test Routes",
+			"description": null,
+			"item": [
+				{
+					"name": "Hello World",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:7777/api/v1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"v1",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stream Routes",
+			"description": null,
+			"item": [
+				{
+					"name": "Stream Create",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:7777/api/v1/stream/user/l5cw62cpvzhnuittq6hc1570377925272",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"v1",
+								"stream",
+								"user",
+								"l5cw62cpvzhnuittq6hc1570377925272"
+							]
+						},
+						"description": "Used to create a stream instance and associate with user"
+					},
+					"response": []
+				},
+				{
+					"name": "Stream Persist",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:7777/api/v1/stream/5d9a113d90340182a90fa13b/user/l5cw62cpvzhnuittq6hc1570377925272",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"v1",
+								"stream",
+								"5d9a113d90340182a90fa13b",
+								"user",
+								"l5cw62cpvzhnuittq6hc1570377925272"
+							]
+						},
+						"description": "Used to keep alive a stream for user"
+					},
+					"response": []
+				},
+				{
+					"name": "Stream Destroy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:7777/api/v1/stream/5d9a113d90340182a90fa13b/user/l5cw62cpvzhnuittq6hc1570377925272",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"v1",
+								"stream",
+								"5d9a113d90340182a90fa13b",
+								"user",
+								"l5cw62cpvzhnuittq6hc1570377925272"
+							]
+						},
+						"description": "Used to destroy stream and de-associate with user, allowing another stream to be consumed"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Docs",
+			"description": null,
+			"item": [
+				{
+					"name": "Swagger Docs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:7777/api/v1/docs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"v1",
+								"docs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

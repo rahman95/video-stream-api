@@ -11,7 +11,7 @@ const userController = require('./../controllers/userController');
 const streamController = require('./../controllers/streamController');
 
 const router = express.Router();
-const openApiSpec = require('./../../openapi.json');
+const openApiSpec = require('./../../api/openapi.json');
 
 // Api Docs
 router.use('/docs', swaggerUi.serve);
