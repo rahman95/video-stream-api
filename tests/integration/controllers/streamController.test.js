@@ -44,7 +44,8 @@ describe('Stream Controller', () => {
     const newStream = await streamModel.findById(stream._id).exec();
     const newUpdatedAt = newStream.updatedAt;
 
-    expect(mockRes.status).toHaveBeenCalledWith(204);
+    expect(mockRes.status).toHaveBeenCalledWith(200);
+    expect(mockRes.json).toHaveBeenCalledWith({ success: true });
     expect(updatedAt).not.toEqual(newUpdatedAt);
     expect(dayjs(newUpdatedAt).isAfter(dayjs(updatedAt))).toBeTruthy();
   });
@@ -72,6 +73,7 @@ describe('Stream Controller', () => {
 
     expect(newUser.streamCount).toBe(1);
     expect(newStream).toBeFalsy();
-    expect(mockRes.status).toHaveBeenCalledWith(204);
+    expect(mockRes.status).toHaveBeenCalledWith(200);
+    expect(mockRes.json).toHaveBeenCalledWith({ success: true });
   });
 });

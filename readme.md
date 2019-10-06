@@ -69,25 +69,25 @@ I have also made it very easy and configurable to set route prefixes to the abov
 
 More information on these endpoints can be found by starting the server up and visiting the `/docs` endpoint. The endpoint contains a `swagger/openApi` interface with details about each endpoint.
 
-I have also gone through the trouble of creating a postman collection export, which can be imported into `postman` and will make it easier for you to test each endpoint. This export can be found in the `api` folder in the root of the project.
+I have also gone through the trouble of creating a postman collection export, which can be imported into `Postman` and will make it easier for you to test each endpoint. This export can be found in the `api` folder in the root of the project.
 
 ## Testing 🏋️‍
 
-This whole project was built using a TDD approach, i tried to stick to it as much as possible. I used `jest` for my testing library and tried to split tests into unit and integration. All unit tests are quite basic and make sure the application is set up as expect. The integration tests are a lot more intense and actually test the functionality as a whole. I have tested every controller, middleware, model and route. This has allowed me to reach a very good code coverage percentage, at the time of writting this it was around `99%`. To run these tests simply run `npm run test`.
+This whole project was built using a TDD approach, I tried to stick to it as much as possible. I used `jest` for my testing library and tried to split tests into `unit` and `integration`. All unit tests are quite basic and make sure the application is set up as expect. The integration tests are a lot more intense and actually test the functionality as a whole. I have tested every controller, middleware, model and route. This has allowed me to reach a very good code coverage percentage, at the time of writting this it was `100%`. To run these tests simply run `npm run test`.
 
-I have also automated tests and coverage generation by using `TravisCI` to build, run my tests and generate coverage.
+I have also automated tests and coverage generation by using `TravisCI` to build, run tests and generate coverage.
 
 ## Scalability 🎛
 
 The way this current project is built gives us the ability to configure the core functionality of the project which is the `keep alive` feature, we can configure how often it is called allowing us to gain fine grain control and how often the api may be hit with requests. 
 
-I choose to use this heartbeat or keepalive functionality as i believe it to be less intesive than opening up a web socket which retains a direct connection to the server during the entire session, this approach seams costly. My apparoch of polling every 90 seconds (can be changed to something less frequent) is less intensive and seems more scalable.
+I choose to use this heartbeat or keepalive functionality as I believe it to be less intesive than opening up a web socket which retains a direct connection to the server during the entire session, this approach seams costly. My apparoch of polling every 90 seconds (can be changed to something less frequent) is less intensive and seems more scalable.
 
 I used a minimal amount of libraries and tried to keep bloat to the minimum however I believe, I couldve forgone with express and used something like [fastify](https://www.fastify.io) which boasts of being able to handle nearly double the amount of requests in the same space of time. The benchmarks can be seen [here](https://www.fastify.io/benchmarks/). Also mongoose is not required to use mongo on node and could have been avoided, this would further help promote scalability.
 
 The way this application is built it can be deployed very easily and used behind load balancers, this would be a way to handle the traffic and route it to an available server. I believe if I had more time, I could've used something like docker or kubernetes to containerise the solution and allow it to be more easily be set up and deployed.
 
-I decided to use mongo for my persistance layer but considered using something like redis in conjunction to hold only the number of active streams a user has, this would then be updated every time a user adds or removes a stream. Storing it a cache layer like redis would allow for very quick access, it no longer is as dependent on the database.
+I decided to use mongo for my persistance layer but considered using something like redis in conjunction to hold only the number of active streams a user has, this would then be updated every time a user adds or removes a stream. Storing it in a cache layer like redis would allow for very quick access, it no longer is as dependent on the database.
 
 Lastly I believe if I had more time I would've de-coupled the server and database instance, the reason for this is that it would allow me to more easily switch stuff out and configure. At the moment it's built as a bit of monolithic system, if the database was decoupled it would be a really nice system which could be language/technology agnostic and have its own set of tests and features. I believe a microserve architecture would've been a really nice way of structuring this project.
 

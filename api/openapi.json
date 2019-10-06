@@ -155,8 +155,8 @@
           }
         } ],
         "responses" : {
-          "204" : {
-            "description" : "returns statusCode 204 to show it has been deleted"
+          "200" : {
+            "description" : "returns true to denote successful deletion"
           },
           "400" : {
             "description" : "throws error if token or stream passed"
@@ -198,8 +198,8 @@
           }
         } ],
         "responses" : {
-          "204" : {
-            "description" : "returns statusCode 204 to show stream has been updated and kept alive"
+          "200" : {
+            "description" : "returns success true to show stream has been updated and kept alive"
           },
           "400" : {
             "description" : "throws error if token or stream passed"

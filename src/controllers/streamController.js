@@ -17,7 +17,7 @@ const streamController = {
 
     await stream.keepAlive();
 
-    res.status(204);
+    res.status(200).json({ success: true });
   },
   destroy: async (req, res) => {
     const { user, stream } = res.locals;
@@ -33,7 +33,7 @@ const streamController = {
       .findOneAndRemove({ _id: stream.id }, { useFindAndModify: false })
       .exec();
 
-    res.status(204);
+    res.status(200).json({ success: true });
   },
 };
 

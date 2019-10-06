@@ -150,6 +150,21 @@ describe('Routes', () => {
       expect(response.statusCode).toBe(403);
       expect(response.text).toBe('Error - Forbidden');
     });
+
+    test('should return with 200 if valid data passed', async () => {
+      const stream = await streamModel.create({
+        updatedAt: dayjs(),
+      });
+      const user = await userModel.create({
+        token: 'abc123',
+        streams: [stream._id],
+      });
+      const url = buildStreamUrl({ user: user.token, stream: stream._id });
+      const response = await request(app).patch(url);
+
+      expect(response.statusCode).toBe(200);
+      expect(response.body).toEqual({ success: true });
+    });
   });
 
   describe('Stream Destroy Route', () => {
@@ -188,6 +203,21 @@ describe('Routes', () => {
 
       expect(response.statusCode).toBe(403);
       expect(response.text).toBe('Error - Forbidden');
+    });
+
+    test('should return with 200 if valid data passed', async () => {
+      const stream = await streamModel.create({
+        updatedAt: dayjs(),
+      });
+      const user = await userModel.create({
+        token: 'abc123',
+        streams: [stream._id],
+      });
+      const url = buildStreamUrl({ user: user.token, stream: stream._id });
+      const response = await request(app).delete(url);
+
+      expect(response.statusCode).toBe(200);
+      expect(response.body).toEqual({ success: true });
     });
   });
 });
