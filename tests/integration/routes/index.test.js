@@ -29,6 +29,15 @@ describe('Routes', () => {
     });
   });
 
+  describe('Api Docs Route', () => {
+    test('should return with 301 to swagger docs', async () => {
+      const url = buildBaseUrl();
+      const response = await request(app).get(`${url}/docs`);
+
+      expect(response.statusCode).toBe(301);
+    });
+  });
+
   describe('User Create Route', () => {
     test('should return with 200 and token', async () => {
       const url = buildUserUrl();

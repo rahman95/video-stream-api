@@ -1,0 +1,259 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Video Stream API",
+    "description" : "Simple API to allow users to consume streams of media. API is built to limit number of concurrent streams for each user, this is currently set to a max of 3.",
+    "contact" : {
+      "email" : "rahman_95@live.co.uk"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version" : "1.0.0-oas3"
+  },
+  "tags" : [ {
+    "name" : "user",
+    "description" : "User based calls"
+  }, {
+    "name" : "stream",
+    "description" : "Stream based calls"
+  } ],
+  "paths" : {
+    "/user" : {
+      "get" : {
+        "tags" : [ "user" ],
+        "summary" : "create token for user",
+        "description" : "Allows user to generate a unique token which can be used for consumption of streams\n",
+        "operationId" : "userCreate",
+        "responses" : {
+          "200" : {
+            "description" : "returns token which is used for consumption",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Token"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{token}" : {
+      "get" : {
+        "tags" : [ "user" ],
+        "summary" : "get user streams",
+        "description" : "Allows user to see all their streams\n",
+        "operationId" : "userShow",
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "path",
+          "description" : "User Token",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "returns streamCount and streams for user",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/UserStreams"
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "throws error if token not found"
+          }
+        }
+      }
+    },
+    "/stream/user/{token}" : {
+      "get" : {
+        "tags" : [ "stream" ],
+        "summary" : "create stream for user",
+        "description" : "Generate stream for user to consume\n",
+        "operationId" : "streamCreate",
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "path",
+          "description" : "User Token",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "returns stream identifier",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Stream"
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "throws error if token passed"
+          },
+          "403" : {
+            "description" : "throws error if user has already reached max stream limit"
+          },
+          "404" : {
+            "description" : "throws error if token not found"
+          }
+        }
+      }
+    },
+    "/stream/{stream}/user/{token}" : {
+      "delete" : {
+        "tags" : [ "stream" ],
+        "summary" : "destroy stream for user",
+        "description" : "Destroys stream allowing user to add another in its place\n",
+        "operationId" : "streamDestroy",
+        "parameters" : [ {
+          "name" : "stream",
+          "in" : "path",
+          "description" : "Stream Identifer",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        }, {
+          "name" : "token",
+          "in" : "path",
+          "description" : "User Token",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "returns statusCode 204 to show it has been deleted"
+          },
+          "400" : {
+            "description" : "throws error if token or stream passed"
+          },
+          "403" : {
+            "description" : "throws error if user has already reached max stream limit"
+          },
+          "404" : {
+            "description" : "throws error if token or stream not found"
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "stream" ],
+        "summary" : "keep stream alive",
+        "description" : "Keep alive stream request for user\n",
+        "operationId" : "streamPersist",
+        "parameters" : [ {
+          "name" : "stream",
+          "in" : "path",
+          "description" : "Stream Identifer",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        }, {
+          "name" : "token",
+          "in" : "path",
+          "description" : "User Token",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "returns statusCode 204 to show stream has been updated and kept alive"
+          },
+          "400" : {
+            "description" : "throws error if token or stream passed"
+          },
+          "403" : {
+            "description" : "throws error if user has already reached max stream limit"
+          },
+          "404" : {
+            "description" : "throws error if token or stream not found"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Token" : {
+        "required" : [ "token" ],
+        "type" : "object",
+        "properties" : {
+          "token" : {
+            "type" : "string",
+            "format" : "uuid",
+            "example" : "d290f1ee-6c54-4b01-90e6-d701748f0851"
+          }
+        }
+      },
+      "UserStreams" : {
+        "required" : [ "streamCount", "streams" ],
+        "type" : "object",
+        "properties" : {
+          "streamCount" : {
+            "type" : "integer",
+            "example" : 2
+          },
+          "streams" : {
+            "type" : "array",
+            "example" : [ "d290f1ee", "d290f1ee" ],
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "Stream" : {
+        "required" : [ "stream" ],
+        "type" : "object",
+        "properties" : {
+          "stream" : {
+            "type" : "string",
+            "example" : "d290f1ee"
+          }
+        }
+      }
+    }
+  }
+}

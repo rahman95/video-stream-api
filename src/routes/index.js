@@ -1,4 +1,5 @@
 const express = require('express');
+const swaggerUi = require('swagger-ui-express');
 
 // Middlewares
 const checkUserToken = require('./../middlewares/checkUserToken');
@@ -10,6 +11,11 @@ const userController = require('./../controllers/userController');
 const streamController = require('./../controllers/streamController');
 
 const router = express.Router();
+const openApiSpec = require('./../../openapi.json');
+
+// Api Docs
+router.use('/docs', swaggerUi.serve);
+router.get('/docs', swaggerUi.setup(openApiSpec));
 
 // Testing
 if (process.env.NODE_ENV !== 'production') {
