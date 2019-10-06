@@ -77,3 +77,17 @@ This whole project was built using a TDD approach, i tried to stick to it as muc
 
 I have also automated tests and coverage generation by using `TravisCI` to build, run my tests and generate coverage.
 
+## Scalability 🎛
+
+The way this current project is built gives us the ability to configure the core functionality of the project which is the `keep alive` feature, we can configure how often it is called allowing us to gain fine grain control and how often the api may be hit with requests. 
+
+I choose to use this heartbeat or keepalive functionality as i believe it to be less intesive than opening up a web socket which retains a direct connection to the server during the entire session, this approach seams costly. My apparoch of polling every 90 seconds (can be changed to something less frequent) is less intensive and seems more scalable.
+
+I used a minimal amount of libraries and tried to keep bloat to the minimum however I believe, I couldve forgone with express and used something like [fastify](https://www.fastify.io) which boasts of being able to handle nearly double the amount of requests in the same space of time. The benchmarks can be seen [here](https://www.fastify.io/benchmarks/). Also mongoose is not required to use mongo on node and could have been avoided, this would further help promote scalability.
+
+The way this application is built it can be deployed very easily and used behind load balancers, this would be a way to handle the traffic and route it to an available server. I believe if I had more time, I could've used something like docker or kubernetes to containerise the solution and allow it to be more easily be set up and deployed.
+
+I decided to use mongo for my persistance layer but considered using something like redis in conjunction to hold only the number of active streams a user has, this would then be updated every time a user adds or removes a stream. Storing it a cache layer like redis would allow for very quick access, it no longer is as dependent on the database.
+
+Lastly I believe if I had more time I would've de-coupled the server and database instance, the reason for this is that it would allow me to more easily switch stuff out and configure. At the moment it's built as a bit of monolithic system, if the database was decoupled it would be a really nice system which could be language/technology agnostic and have its own set of tests and features. I believe a microserve architecture would've been a really nice way of structuring this project.
+

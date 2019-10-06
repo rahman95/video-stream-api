@@ -18,11 +18,9 @@ router.use('/docs', swaggerUi.serve);
 router.get('/docs', swaggerUi.setup(openApiSpec));
 
 // Testing
-if (process.env.NODE_ENV !== 'production') {
-  router.get('/', function(req, res) {
-    res.send('Hello World!');
-  });
-}
+router.get('/', function(req, res) {
+  res.send('Hello World!');
+});
 
 // API Routes
 router.get('/user', userController.create);
