@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { createToken } = require('./../utils/helpers');
 const config = require('./../../config.json');
 
 // Define Schema

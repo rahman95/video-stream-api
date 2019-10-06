@@ -15,7 +15,11 @@
     "type": "git",
     "url": "git+https://github.com/rahman95/video-stream-api.git"
   },
-  "author": "",
+  "author": { 
+    "name" : "Rahman Younus",
+    "email" : "rahman_95@live.co.uk",
+    "url" : "https://ryounus.dev/"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rahman95/video-stream-api/issues"
